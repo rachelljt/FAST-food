@@ -5,16 +5,15 @@ import { StyleSheet, Text, View, TextInput, Modal, useState, Button} from 'react
 const LoginScreen = props => {
     const [isLoginMode, setIsLoginMode] = React.useState(true);
     return (
-        <Modal visible = {isLoginMode} >
         <View style = {styles.screen}>
         <Text style = {styles.myText}>Welcome to       FAST food!</Text>
         <View style = {styles.input}>
             <TextInput style = {styles.myOtherText} placeholder = 'Username'></TextInput>
             <TextInput style = {styles.myOtherText} secureTextEntry={true} placeholder = 'Password'></TextInput>
-            <Button title = 'Login' color ='#A723AB' onPress ={()=> setIsLoginMode(false)}/>
+           
         </View>
         </View>
-        </Modal>
+      
 
     );
 }
