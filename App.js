@@ -1,18 +1,17 @@
 import React from 'react';
-import { StyleSheet, ScrollView, View, Text, TextInput, Button} from 'react-native';
+import { StyleSheet, ScrollView, Button, useState, ImagePropTypes } from 'react-native';
 
 import Header from './app/components/Header';
+import LoginScreen from './screens/LoginScreen';
 
-export default class App extends React.Component {
-  render() {
+export default function App() {
+
     return (
     <ScrollView style={styles.container}>
-      <Header />
-      <Text style = {styles.myText}>Welcome to our app!</Text>
-      <TextInput style = {styles.myText}>Orders</TextInput>
+      <Header title = "Fast Food"/>
+      <LoginScreen/>
     </ScrollView>
     );
-  }
 }
 
 
@@ -20,15 +19,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: 'pink',
-    padding: 40,
-    marginBottom: 50
-    
-  },
-  myText: {
-    marginTop: 10,
-    fontFamily: "Marker Felt",
-    fontStyle: "italic",
-    fontSize: 40    
-  },
+  }
   
 });

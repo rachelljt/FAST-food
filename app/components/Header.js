@@ -1,41 +1,43 @@
 import React from 'react';
 import { StyleSheet, Text, View, Image } from 'react-native';
 
-export default class Header extends React.Component {
-  render() {
-  return(
-      <View style = {styles.header}> 
+const Header = props => {
+    return(
+        <View style = {styles.header}> 
             <Image 
             source = {require('../images/food.jpg')}
             style = {styles.food} 
             />
-            <Text style = {styles.logo}>FAST food</Text>
+            <Text style = {styles.logo}>{props.title}</Text>
       </View>
-    
     );
-  }
-}
+};
+
+
 
 
 const styles = StyleSheet.create({
     header: {
         height : 80,
-        marginTop : 20,
-        backgroundColor : '#fff',
+        marginTop: 50,
+        backgroundColor : '#f7287b',
         flexDirection: 'row',
         alignItems: "center",
         justifyContent: "center",
-        padding: 20,
         borderBottomWidth: 4,
         borderBottomColor: '#ccc'
     },
     food: {
-        width: 40,
-        height: 20
+        width: 50,
+        height: 60,
+        marginRight: 10,
     },
     logo: {
         fontSize: 30,
-        color: 'blue'
+        color: 'black',
+        fontFamily: 'Marker Felt'
     }
 
 });
+
+export default Header;
