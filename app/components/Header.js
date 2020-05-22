@@ -5,7 +5,7 @@ const Header = props => {
     return(
         <View style = {styles.header}> 
             <Image 
-            source = {require('../images/food.jpg')}
+            source = {require('../images/foodclique.jpg')}
             style = {styles.food} 
             />
             <Text style = {styles.logo}>{props.title}</Text>
@@ -28,7 +28,7 @@ const styles = StyleSheet.create({
         borderBottomColor: '#ccc'
     },
     food: {
-        width: 50,
+        width: 70,
         height: 60,
         marginRight: 10,
     },
