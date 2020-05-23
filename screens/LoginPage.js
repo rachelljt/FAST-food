@@ -10,7 +10,7 @@ const LoginPage = props => {
         <View style = {styles.screen}>
             <Text style = {styles.myText}>Welcome to            FAST food!</Text>
             <View style = {styles.button}>
-            <Button title = "Seller"  color = '#A723AB'  onPress ={()=>setIsLoginPage(false)} />
+            <Button title = "Seller"  color = '#A723AB'  onPress ={()=>setIsLoginPage(false) } />
             </View>
             <View style = {styles.button}>
             <Button title = "Buyer" color = '#A723AB'  onPress ={()=>setIsLoginPage(false)} />

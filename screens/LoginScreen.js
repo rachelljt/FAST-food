@@ -1,18 +1,37 @@
 import React from 'react';
-import { StyleSheet, Text, View, TextInput, Modal, useState, Button} from 'react-native';
+import { StyleSheet, Text, View, TextInput, Modal, useState, Button, Alert} from 'react-native';
 
 
 const LoginScreen = props => {
   const [isLoginMode, setIsLoginMode] = React.useState(true);
+  const [Username, onChangeUsername] = React.useState('');
+  const [Password, onChangePassword] = React.useState('');
+
+  const inputHandler = () => {
+    if(Username === '' || Password === '') {
+      Alert.alert('Please enter Username/Password');
+    } else {
+      setIsLoginMode(false);
+    }
+  }
+
       if (isLoginMode)  {
         return (
         <View style = {styles.screen}>
         <Text style = {styles.myText}>Welcome to          FAST food!</Text>
         <View style = {styles.input}>
-            <TextInput style = {styles.myOtherText} placeholder = 'Username'></TextInput>
-            <TextInput style = {styles.myOtherText} secureTextEntry={true} placeholder = 'Password'></TextInput>
+            <TextInput style = {styles.myOtherText} 
+                      placeholder = "Username"
+                      onChangeText = {text => onChangeUsername(text)}
+                       >
+            </TextInput>
+            <TextInput style = {styles.myOtherText} 
+                        placeholder = "Password"
+                        onChangeText = {text => onChangePassword(text)}
+                        secureTextEntry={true} >
+            </TextInput>
             <Button title = "Back" color = '#A723AB' onPress = {() => props.LoginPage(true)}/>
-            <Button title = 'Login' color ='#A723AB' onPress ={()=> setIsLoginMode(false)}/>
+            <Button title = 'Login' color ='#A723AB' onPress ={inputHandler}/>
         </View>
         </View>);
 
