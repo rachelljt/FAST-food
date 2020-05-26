@@ -1,51 +1,55 @@
 import React from 'react';
-import { View, StyleSheet, Button, useState, Text} from 'react-native';
+import { View, StyleSheet, Button, Text} from 'react-native';
 
-import LoginScreen from './LoginScreen'; 
+import Header from '../app/components/Header';
 
 const LoginPage = props => {
-    const [isLoginPage, setIsLoginPage] = React.useState(true);
-    if (isLoginPage) {
     return (
         <View style = {styles.screen}>
-            <Text style = {styles.myText}>Welcome to            FAST food!</Text>
+            <Text style = {styles.myText} numberOfLines = {2}>Welcome to FAST food!</Text>
             <View style = {styles.button}>
-            <Button title = "Seller"  color = '#A723AB'  onPress ={()=>setIsLoginPage(false) } />
+            <Button title = "Seller"  color = 'black' onPress = { () => {
+                props.navigation.navigate({routeName : 'SellerLogin'});
+            }} />
             </View>
             <View style = {styles.button}>
-            <Button title = "Buyer" color = '#A723AB'  onPress ={()=>setIsLoginPage(false)} />
+            <Button title = "Buyer" color = 'black' onPress = { () => {
+                props.navigation.navigate({routeName : 'BuyerLogin'});
+            }} />
             </View>
         </View>
     ); 
-        } else {
-            return (
-            <LoginScreen LoginPage = {setIsLoginPage}/>
-            );
-        }
+}
+
+LoginPage.navigationOptions = {
+    headerTitle : '',
+    headerBackground : () => (<Header/>)
 }
 
 const styles = StyleSheet.create({
     screen: {
         flex: 1,
-        padding: 20,
-        alignItems: "center"
+        alignItems: "center",
+        backgroundColor: 'pink'
     },
     button: {
         borderWidth: 2,
         padding: 5,
         marginBottom: 10,
-        width: '80%'
+        width: '80%',
+        borderColor : '#DC9BE2',
+        backgroundColor : '#DC9BE2'
     },
     myText: {
-        fontFamily: "Marker Felt",
+        fontFamily: 'avocado-creamy',
         fontStyle: "italic",
-        fontSize: 40,
+        fontSize: 50,
         margin: 10,
-        borderWidth: 2,
-        borderColor: 'white',
         padding: 10,
         marginBottom: 10,
-        textAlign:'center'
+        textAlign:'center',
+        width: '60%'
+
       }
 });
 

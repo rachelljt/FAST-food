@@ -8,7 +8,7 @@ const Header = props => {
             source = {require('../images/foodclique.jpg')}
             style = {styles.food} 
             />
-            <Text style = {styles.logo}>{props.title}</Text>
+            <Text style = {styles.logo}>Fast Food</Text>
       </View>
     );
 };
@@ -18,24 +18,23 @@ const Header = props => {
 
 const styles = StyleSheet.create({
     header: {
-        height : 80,
-        marginTop: 50,
+        height : 100,
         backgroundColor : '#f7287b',
         flexDirection: 'row',
         alignItems: "center",
         justifyContent: "center",
-        borderBottomWidth: 4,
-        borderBottomColor: '#ccc'
     },
     food: {
         width: 70,
-        height: 60,
+        height: 40,
         marginRight: 10,
+        marginTop: 20
     },
     logo: {
         fontSize: 30,
         color: 'black',
-        fontFamily: 'Marker Felt'
+        fontFamily: 'Marker Felt',
+        paddingTop: 20
     }
 
 });
