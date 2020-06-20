@@ -41,7 +41,7 @@ const SellerLoginScreen = props => {
 
 SellerLoginScreen.navigationOptions = {
     headerTitle : '',
-    headerBackground : () => (<Header/>)
+    headerBackground : () => (<Header/>),
   }
 
 const styles = StyleSheet.create({

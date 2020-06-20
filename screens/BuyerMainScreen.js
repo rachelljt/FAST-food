@@ -1,55 +1,75 @@
 import React from 'react';
-import { View, StyleSheet, Button, Text, FlatList, TouchableOpacity, ScrollView} from 'react-native';
-
+import { View, StyleSheet, Text, FlatList, Platform, ScrollView , Button} from 'react-native';
+import { HeaderButtons, Item } from 'react-navigation-header-buttons';
 import Header from '../app/components/Header';
 import { STALLS } from '../data/dummy-data';
 import StallGridTile from '../app/components/StallGridTile';
+import HeaderButton from '../app/components/HeaderButton';
 
 
 const BuyerMainScreen = props => {
-  const userId =  props.navigation.getParam('userID');
+  const userId = props.navigation.getParam('userID');
   const renderGridItem = (itemData) => {
     return (
-      <StallGridTile 
-        title = {itemData.item.title} 
-        onSelect = { () => {
-          props.navigation.navigate({routeName : 'BuyerMeals', 
-          params : {
-            stallID : itemData.item.id
-          } });
+      <StallGridTile
+        title={itemData.item.title}
+        onSelect={() => {
+          props.navigation.navigate({
+            routeName: 'BuyerMeals',
+            params: {
+              stallID: itemData.item.id
+            }
+          });
         }} />
     );
   };
-    return (
-        <ScrollView>
-       <View style = {styles.screen}><Text style = {styles.myText}>{userId}</Text></View>
-        <FlatList data = {STALLS} renderItem={renderGridItem} numColumns = {1}/>
-        </ScrollView>
-      
-    );
+  return (
+    <ScrollView>
+      <View style={styles.screen}><Text style={styles.myText}>{userId}</Text></View>
+      <FlatList data={STALLS} renderItem={renderGridItem} numColumns={1} />
+      <Button title = 'Logout' onPress = {()=> props.navigation.goBack()} />
+    </ScrollView>
+
+  );
 }
 
 
-BuyerMainScreen.navigationOptions = {
-    headerTitle : '',
-    headerBackground : () => (<Header/>),
-    headerBackTitle: 'Logout',
-    
-  }
+BuyerMainScreen.navigationOptions = navigationData => {
+  return {
+    headerTitle: '',
+    headerBackground: () => (<Header />),
+    headerRight: (<HeaderButtons HeaderButtonComponent={HeaderButton}>
+      <Item title='Cart'
+        iconName={Platform.OS === 'android' ? 'md-cart' : 'ios-cart'}
+        onPress={() => {
+          navigationData.navigation.navigate('Cart');
+        }} />
+    </HeaderButtons>
+    ),
+    headerLeft:  (<HeaderButtons HeaderButtonComponent={HeaderButton}>
+    <Item title='Menu'
+      iconName={Platform.OS === 'android' ? 'md-menu' : 'ios-menu'}
+      onPress={() => {
+        navigationData.navigation.toggleDrawer();
+      }} />
+  </HeaderButtons>)
+  };
+
+}
 
 const styles = StyleSheet.create({
-  screen : {
+  screen: {
     alignItems: 'center',
   },
-  myText : {
-    fontSize : 20,
-    textAlign : 'center',
-    marginTop : 25,
+  myText: {
+    fontSize: 20,
+    textAlign: 'center',
+    marginTop: 25,
     borderWidth: 2,
-    borderColor : 'purple',
+    borderColor: 'purple',
     width: '50%',
-    fontFamily : 'humble-boys'
-    
+    fontFamily: 'humble-boys'
+
   }
 
 });
