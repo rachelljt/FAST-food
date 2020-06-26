@@ -1,56 +1,65 @@
-import React from 'react';
-import { View, StyleSheet, Button, Text} from 'react-native';
+import React from "react";
+import { View, StyleSheet, Button, Text, Image } from "react-native";
 
-import Header from '../app/components/Header';
+import Header from "../components/Header";
+import Colors from "../constants/colors";
 
-const LoginPage = props => {
-    return (
-        <View style = {styles.screen}>
-            <Text style = {styles.myText} numberOfLines = {2}>Welcome to FAST food!</Text>
-            <View style = {styles.button}>
-            <Button title = "Seller"  color = 'black' onPress = { () => {
-                props.navigation.navigate({routeName : 'SellerLogin'});
-            }} />
-            </View>
-            <View style = {styles.button}>
-            <Button title = "Buyer" color = 'black' onPress = { () => {
-                props.navigation.navigate({routeName : 'BuyerLogin'});
-            }} />
-            </View>
-        </View>
-    ); 
-}
-
-LoginPage.navigationOptions = {
-    headerTitle : '',
-    headerBackground : () => (<Header/>)
-}
+const LoginPage = (props) => {
+  return (
+    <View style={styles.screen}>
+      <Text style={styles.text} numberOfLines={2}>
+        FAST-food
+      </Text>
+      <Image
+        source={require("../assets/images/foodclique.jpg")}
+        style={styles.appLogo}
+      />
+      <View style={styles.button}>
+        <Button
+          title="Seller"
+          color="black"
+          onPress={() => {
+            props.navigation.navigate({ routeName: "SellerLogin" });
+          }}
+        />
+      </View>
+      <View style={styles.button}>
+        <Button
+          title="Buyer"
+          color="black"
+          onPress={() => {
+            props.navigation.navigate({ routeName: "BuyerLogin" });
+          }}
+        />
+      </View>
+    </View>
+  );
+};
 
 const styles = StyleSheet.create({
-    screen: {
-        flex: 1,
-        alignItems: "center",
-        backgroundColor: 'pink'
-    },
-    button: {
-        borderWidth: 2,
-        padding: 5,
-        marginBottom: 10,
-        width: '80%',
-        borderColor : '#DC9BE2',
-        backgroundColor : '#DC9BE2'
-    },
-    myText: {
-        fontFamily: 'avocado-creamy',
-        fontStyle: "italic",
-        fontSize: 50,
-        margin: 10,
-        padding: 10,
-        marginBottom: 10,
-        textAlign:'center',
-        width: '60%'
-
-      }
+  screen: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "white",
+  },
+  appLogo: {
+    width: "70%",
+    height: "15%",
+    resizeMode: "stretch",
+  },
+  text: {
+    fontFamily: "avocado-creamy",
+    fontStyle: "italic",
+    fontSize: 50,
+    textAlign: "center",
+    width: "60%",
+  },
+  button: {
+    width: "60%",
+    margin: 10,
+    backgroundColor: Colors.accent,
+  },
 });
 
 export default LoginPage;
