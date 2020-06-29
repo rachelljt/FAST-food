@@ -1,5 +1,12 @@
 import React from "react";
-import { FlatList, Button, View, Platform, StyleSheet } from "react-native";
+import {
+  FlatList,
+  Button,
+  View,
+  Platform,
+  StyleSheet,
+  Alert,
+} from "react-native";
 import { useSelector, useDispatch } from "react-redux";
 import { HeaderButtons, Item } from "react-navigation-header-buttons";
 
@@ -14,6 +21,19 @@ const SellerMenuScreen = (props) => {
 
   const editItemHandler = (id) => {
     props.navigation.navigate("EditItem", { itemId: id });
+  };
+
+  const deleteHandler = (id) => {
+    Alert.alert("Confirmation", "Are you sure you want to delete this item?", [
+      { text: "No", style: "default" },
+      {
+        text: "Yes",
+        style: "destructive",
+        onPress: () => {
+          dispatch(mealsAction.deleteItem(id));
+        },
+      },
+    ]);
   };
 
   return (
@@ -36,14 +56,10 @@ const SellerMenuScreen = (props) => {
               onPress={() => {
                 editItemHandler(itemData.item.id);
               }}
-              color="white"
             />
             <Button
               title="Delete"
-              onPress={() => {
-                dispatch(mealsAction.deleteItem(itemData.item.id));
-              }}
-              color="white"
+              onPress={deleteHandler.bind(this, itemData.item.id)}
             />
           </View>
         </MealItem>
@@ -68,7 +84,7 @@ SellerMenuScreen.navigationOptions = (navigationData) => {
         />
       </HeaderButtons>
     ),
-    headerRight: (
+    headerRight: () => (
       <HeaderButtons HeaderButtonComponent={HeaderButton}>
         <Item
           title="Add"

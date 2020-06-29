@@ -2,20 +2,22 @@ import React from "react";
 import { View, StyleSheet, Button, FlatList, Platform } from "react-native";
 import { HeaderButtons, Item } from "react-navigation-header-buttons";
 import Colors from "../../constants/colors";
-import { useSelector, useDipsatch } from 'react-redux'; 
+import { useSelector, useDipsatch } from "react-redux";
 
 import { STALLS, MEALS } from "../../data/dummy-data";
 import MealItem from "../../components/MealItem";
 import Meal from "../../models/Meals";
 import HeaderButton from "../../components/HeaderButton";
-import * as mealsActions from '../../store/actions/meals';
+import * as mealsActions from "../../store/actions/meals";
 
 const BuyerMealsScreen = (props) => {
   const stallId = props.navigation.getParam("stallID");
 
   // const displayedMeals = MEALS.filter((meal) => meal.stallId === stallId);
 
-  const displayedMeals = useSelector(state => state.meals.meals.filter((meal) => meal.stallId === stallId));
+  const displayedMeals = useSelector((state) =>
+    state.meals.meals.filter((meal) => meal.stallId === stallId)
+  );
 
   const toPrefScreen = (id) => {
     props.navigation.navigate({
@@ -60,7 +62,7 @@ BuyerMealsScreen.navigationOptions = (navigationData) => {
   return {
     headerTitle: selectedStall.title,
     headerTintColor: "pink",
-    headerRight: (
+    headerRight: () => (
       <HeaderButtons HeaderButtonComponent={HeaderButton}>
         <Item
           title="Cart"
