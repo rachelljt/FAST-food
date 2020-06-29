@@ -1,5 +1,6 @@
 import { MEALS } from "../../data/dummy-data";
-import { DELETE_ITEM } from "../actions/meals";
+import { DELETE_ITEM, CREATE_ITEM, UPDATE_ITEM } from "../actions/meals";
+import Meal from "../../models/Meals";
 
 const initialState = {
   meals: MEALS,
@@ -8,6 +9,46 @@ const initialState = {
 
 export default (state = initialState, action) => {
   switch (action.type) {
+    case CREATE_ITEM:
+      const newItem = new Meal(
+        new Date().toString(),
+        "s1",
+        action.itemData.title,
+        action.itemData.price,
+        action.itemData.imageUrl
+      );
+      return {
+        ...state,
+        meals: state.meals.concat(newItem),
+        stallItems: state.stallItems.concat(newItem),
+      };
+
+    case UPDATE_ITEM:
+      const stallItemIndex = state.stallItems.findIndex(
+        (item) => item.id === action.itemId
+      );
+      const updatedItem = new Meal(
+        action.itemId,
+        state.stallItems[stallItemIndex].stallId,
+        action.itemData.title,
+        action.itemData.price,
+        action.itemData.imageUrl
+      );
+      const updatedStallItems = [...state.stallItems];
+      updatedStallItems[stallItemIndex] = updatedItem;
+
+      const mealsIndex = state.meals.findIndex(
+        (item) => item.id === action.itemId
+      );
+      const updatedMealsItems = [...state.meals];
+      updatedMealsItems[mealsIndex] = updatedItem;
+
+      return {
+        ...state,
+        meals: updatedMealsItems,
+        stallItems: updatedStallItems,
+      };
+
     case DELETE_ITEM:
       return {
         ...state,

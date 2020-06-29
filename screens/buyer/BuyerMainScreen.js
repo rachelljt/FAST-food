@@ -46,7 +46,7 @@ BuyerMainScreen.navigationOptions = (navigationData) => {
   return {
     headerTitle: "",
     headerBackground: () => <Header />,
-    headerRight: (
+    headerRight: () => (
       <HeaderButtons HeaderButtonComponent={HeaderButton}>
         <Item
           title="Cart"
@@ -57,7 +57,7 @@ BuyerMainScreen.navigationOptions = (navigationData) => {
         />
       </HeaderButtons>
     ),
-    headerLeft: (
+    headerLeft: () => (
       <HeaderButtons HeaderButtonComponent={HeaderButton}>
         <Item
           title="Menu"

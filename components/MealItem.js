@@ -3,6 +3,7 @@ import { View, Text, StyleSheet, Image } from "react-native";
 
 const MealItem = (props) => {
   const id = props.id;
+
   // return (
   // <View style = {styles.screen}>
   //    <View style = { styles.mealsHeader }>
@@ -26,10 +27,7 @@ const MealItem = (props) => {
         </Text>
         <Text style={styles.price}>${props.price.toFixed(2)}</Text>
       </View>
-      <View style={styles.button}>
-        {props.children}
-        {/* <Button title="Add to Cart" onPress={props.onSelect} color="purple" /> */}
-      </View>
+      <View style={styles.button}>{props.children}</View>
     </View>
   );
 };
