@@ -4,20 +4,6 @@ import { View, Text, StyleSheet, Image } from "react-native";
 const MealItem = (props) => {
   const id = props.id;
 
-  // return (
-  // <View style = {styles.screen}>
-  //    <View style = { styles.mealsHeader }>
-  //     <View style = {styles.mealsDetails}>
-  //        <Text style = {{width : '60%'}}>{props.title}</Text>
-  //        <Text>${props.price.toFixed(2)}</Text>
-  //        <Button
-  //         title = 'Add to cart'
-  //         onPress = {props.onSelect}/>
-  //        </View>
-  //        <ImageBackground style = {styles.background} source = {{uri: props.image}}/>
-  //     </View>
-  // </View>
-  // );
   return (
     <View style={styles.screen}>
       <Image source={{ uri: props.image }} style={styles.image} />

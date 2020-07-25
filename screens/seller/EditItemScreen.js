@@ -1,4 +1,4 @@
-import React, { useEffect, useCallback, useReducer } from "react";
+import React, { useState, useEffect, useCallback, useReducer } from "react";
 import {
   View,
   ScrollView,
@@ -6,6 +6,7 @@ import {
   Platform,
   Alert,
   KeyboardAvoidingView,
+  ActivityIndicator,
 } from "react-native";
 import { useSelector, useDispatch } from "react-redux";
 
@@ -13,6 +14,7 @@ import { HeaderButtons, Item } from "react-navigation-header-buttons";
 import HeaderButton from "../../components/HeaderButton";
 import * as itemsActions from "../../store/actions/meals";
 import Input from "../../components/UI/Input";
+import Colors from "../../constants/colors";
 
 const FORM_INPUT_UPDATE = "FORM_INPUT_UPDATE";
 
@@ -40,6 +42,9 @@ const formReducer = (state, action) => {
 };
 
 const EditItemScreen = (props) => {
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState();
+
   const itemId = props.navigation.getParam("itemId");
   const editedItem = useSelector((state) =>
     state.meals.stallItems.find((item) => item.id === itemId)
@@ -50,7 +55,7 @@ const EditItemScreen = (props) => {
     inputValues: {
       title: editedItem ? editedItem.title : "",
       imageUrl: editedItem ? editedItem.imageUrl : "",
-      price: editedItem ? editedItem.price : "",
+      price: editedItem ? editedItem.price : 0,
     },
     inputValidities: {
       title: editedItem ? true : false,
@@ -60,7 +65,13 @@ const EditItemScreen = (props) => {
     formIsValid: editedItem ? true : false,
   });
 
-  const submitHandler = useCallback(() => {
+  useEffect(() => {
+    if (error) {
+      Alert.alert("An error occurred!", error, [{ text: "Ok" }]);
+    }
+  }, [error]);
+
+  const submitHandler = useCallback(async () => {
     if (!formState.formIsValid) {
       Alert.alert(
         "Unable to Add Product",
@@ -69,25 +80,35 @@ const EditItemScreen = (props) => {
       );
       return;
     }
-    if (editedItem) {
-      dispatch(
-        itemsActions.updateItem(
-          itemId,
-          formState.inputValues.title,
-          +formState.inputValues.price,
-          formState.inputValues.imageUrl
-        )
-      );
-    } else {
-      dispatch(
-        itemsActions.createItem(
-          formState.inputValues.title,
-          +formState.inputValues.price,
-          formState.inputValues.imageUrl
-        )
-      );
+
+    setError(null);
+    setIsLoading(true);
+
+    try {
+      if (editedItem) {
+        await dispatch(
+          itemsActions.updateItem(
+            itemId,
+            formState.inputValues.title,
+            +formState.inputValues.price,
+            formState.inputValues.imageUrl
+          )
+        );
+      } else {
+        await dispatch(
+          itemsActions.createItem(
+            formState.inputValues.title,
+            +formState.inputValues.price,
+            formState.inputValues.imageUrl
+          )
+        );
+      }
+      props.navigation.goBack();
+    } catch (err) {
+      setError(err.message);
     }
-    props.navigation.goBack();
+
+    setIsLoading(false);
   }, [dispatch, itemId, formState]);
 
   useEffect(() => {
@@ -105,6 +126,14 @@ const EditItemScreen = (props) => {
     },
     [dispatchFormState]
   );
+
+  if (isLoading) {
+    return (
+      <View style={styles.centered}>
+        <ActivityIndicator size="large" color={Colors.primary} />
+      </View>
+    );
+  }
 
   return (
     <KeyboardAvoidingView
@@ -129,7 +158,7 @@ const EditItemScreen = (props) => {
 
           <Input
             id="imageUrl"
-            label="Image URL "
+            label="Image URL"
             errorText="Please enter a valid image url!"
             returnKeyType="next"
             onInputChange={inputChangeHandler}
@@ -144,7 +173,7 @@ const EditItemScreen = (props) => {
             errorText="Please enter a valid price!"
             keyboardType="decimal-pad"
             onInputChange={inputChangeHandler}
-            initialValue={editedItem ? editedItem.price : 0}
+            initialValue={editedItem ? editedItem.price.toString() : ""}
             initiallyValid={!!editedItem}
             required
             min={0.1}
@@ -178,6 +207,11 @@ EditItemScreen.navigationOptions = (navigationData) => {
 const styles = StyleSheet.create({
   overallContainer: {
     margin: 20,
+  },
+  centered: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
   },
 });
 

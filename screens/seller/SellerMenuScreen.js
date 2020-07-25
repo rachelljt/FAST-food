@@ -37,14 +37,13 @@ const SellerMenuScreen = (props) => {
   };
 
   return (
-    //<View>
     <FlatList
       data={sellerItems}
       keyExtractor={(item) => item.id}
       renderItem={(itemData) => (
         <MealItem
-          image={itemData.item.image}
           title={itemData.item.title}
+          image={itemData.item.image}
           price={itemData.item.price}
           onSelect={() => {
             editItemHandler(itemData.item.id);
@@ -64,8 +63,14 @@ const SellerMenuScreen = (props) => {
           </View>
         </MealItem>
       )}
+      ListFooterComponent={
+        <Button
+          style={styles.button}
+          title="Logout"
+          onPress={() => props.navigation.goBack()}
+        />
+      }
     />
-    //</View>
   );
 };
 
@@ -99,9 +104,15 @@ SellerMenuScreen.navigationOptions = (navigationData) => {
 };
 
 const styles = StyleSheet.create({
+  screen: {
+    alignItems: "center",
+  },
   buttonContainer: {
     flexDirection: "row",
     justifyContent: "space-evenly",
+  },
+  button: {
+    padding: 10,
   },
 });
 
