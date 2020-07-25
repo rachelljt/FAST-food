@@ -5,7 +5,6 @@ import {
   Text,
   FlatList,
   Platform,
-  ScrollView,
   Button,
 } from "react-native";
 import { HeaderButtons, Item } from "react-navigation-header-buttons";
@@ -32,13 +31,19 @@ const BuyerMainScreen = (props) => {
     );
   };
   return (
-    <ScrollView>
-      <View style={styles.screen}>
-        <Text style={styles.myText}>{userId}</Text>
-      </View>
-      <FlatList data={STALLS} renderItem={renderGridItem} numColumns={1} />
-      <Button title="Logout" onPress={() => props.navigation.goBack()} />
-    </ScrollView>
+    <FlatList
+      ListHeaderComponent={
+        <View style={styles.screen}>
+          <Text style={styles.myText}>{userId}</Text>
+        </View>
+      }
+      data={STALLS}
+      renderItem={renderGridItem}
+      numColumns={1}
+      ListFooterComponent={
+        <Button title="Logout" onPress={() => props.navigation.goBack()} />
+      }
+    />
   );
 };
 

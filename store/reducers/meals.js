@@ -1,5 +1,10 @@
 import { MEALS } from "../../data/dummy-data";
-import { DELETE_ITEM, CREATE_ITEM, UPDATE_ITEM } from "../actions/meals";
+import {
+  DELETE_ITEM,
+  CREATE_ITEM,
+  UPDATE_ITEM,
+  SET_ITEMS,
+} from "../actions/meals";
 import Meal from "../../models/Meals";
 
 const initialState = {
@@ -9,9 +14,15 @@ const initialState = {
 
 export default (state = initialState, action) => {
   switch (action.type) {
+    case SET_ITEMS:
+      return {
+        meals: action.items,
+        stallItems: action.items.filter((item) => item.stallId === "s1"),
+      };
+
     case CREATE_ITEM:
       const newItem = new Meal(
-        new Date().toString(),
+        action.itemData.id,
         "s1",
         action.itemData.title,
         action.itemData.price,

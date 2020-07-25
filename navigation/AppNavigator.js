@@ -14,6 +14,7 @@ import BuyerOrderScreen from "../screens/buyer/BuyerOrderScreen";
 import SellerLoginScreen from "../screens/seller/SellerLoginScreen";
 import SellerMenuScreen from "../screens/seller/SellerMenuScreen";
 import EditItemScreen from "../screens/seller/EditItemScreen";
+import OrdersScreen from "../screens/seller/OrdersScreen";
 
 import { Ionicons } from "@expo/vector-icons";
 import { Platform } from "react-native";
@@ -58,16 +59,30 @@ const OrdersNavigator = createStackNavigator(
   }
 );
 
-const SellerNavigator = createStackNavigator(
+const BuyerNavigator = createDrawerNavigator(
   {
-    Seller: SellerMenuScreen,
+    Stalls: BuyerMainNavigator,
+    Orders: OrdersNavigator,
+  },
+  {
+    contentOptions: {
+      activeTintColor: Colors.primary,
+    },
+  }
+);
+
+const SellerMainNavigator = createStackNavigator(
+  {
+    Login: LoginPage,
+    SellerLogin: SellerLoginScreen,
+    SellerMenu: SellerMenuScreen,
     EditItem: EditItemScreen,
   },
   {
     navigationOptions: {
       drawerIcon: (drawerConfig) => (
         <Ionicons
-          name={Platform.OS === "android" ? "md-list" : "ios-list"}
+          name={Platform.OS === "android" ? "md-home" : "ios-home"}
           size={23}
           color={drawerConfig.tintColor}
         />
@@ -76,10 +91,21 @@ const SellerNavigator = createStackNavigator(
   }
 );
 
-const BuyerNavigator = createDrawerNavigator(
+const SellerNavigator = createDrawerNavigator(
   {
-    Stalls: BuyerMainNavigator,
-    Orders: OrdersNavigator,
+    Menu: SellerMainNavigator,
+    Orders: OrdersScreen,
+  },
+  {
+    contentOptions: {
+      activeTintColor: Colors.primary,
+    },
+  }
+);
+
+const AppNavigator = createDrawerNavigator(
+  {
+    Buyer: BuyerNavigator,
     Seller: SellerNavigator,
   },
   {
@@ -89,112 +115,4 @@ const BuyerNavigator = createDrawerNavigator(
   }
 );
 
-// const SellerMainNavigator = createStackNavigator(
-//   {
-//     Login: LoginPage,
-//     SellerLogin: SellerLoginScreen,
-//     SellerMenu: SellerMenuScreen,
-//   },
-//   {
-//     navigationOptions: {
-//       drawerIcon: (drawerConfig) => (
-//         <Ionicons
-//           name={Platform.OS === "android" ? "md-home" : "ios-home"}
-//           size={23}
-//           color={drawerConfig.tintColor}
-//         />
-//       ),
-//     },
-//   }
-// );
-
-// const SellerNavigator = createDrawerNavigator(
-//   {
-//     Menu: SellerMainNavigator,
-//     EditMenu: EditMenuScreen,
-//   },
-//   {
-//     contentOptions: {
-//       activeTintColor: Colors.primary,
-//     },
-//   }
-// );
-
-const AppNavigator = createDrawerNavigator(
-  {
-    Buyer: BuyerNavigator,
-    //Seller: SellerNavigator,
-  },
-  {
-    contentOptions: {
-      activeTintColor: Colors.primary,
-    },
-  }
-);
-
 export default createAppContainer(AppNavigator);
-
-// const MainNavigator = createStackNavigator(
-//   {
-//     Login: LoginPage,
-//     BuyerLogin: BuyerLoginScreen,
-//     BuyerMain: BuyerMainScreen,
-//     BuyerMeals: BuyerMealsScreen,
-//     BuyerMealPreference: BuyerMealPreferenceScreen,
-//     Cart: CartScreen,
-
-//     SellerLogin: SellerLoginScreen,
-//     SellerMenu: SellerMenuScreen,
-//   },
-//   {
-//     navigationOptions: {
-//       drawerIcon: (drawerConfig) => (
-//         <Ionicons
-//           name={Platform.OS === "android" ? "md-home" : "ios-home"}
-//           size={23}
-//           color={drawerConfig.tintColor}
-//         />
-//       ),
-//     },
-//   }
-// );
-// const BuyerNavigator = createStackNavigator(
-//   {
-//     Orders: BuyerOrderScreen,
-//   },
-//   {
-//     navigationOptions: {
-//       drawerIcon: (drawerConfig) => (
-//         <Ionicons
-//           name={Platform.OS === "android" ? "md-list" : "ios-list"}
-//           size={23}
-//           color={drawerConfig.tintColor}
-//         />
-//       ),
-//     },
-//   }
-// );
-
-// const SellerNavigator = createDrawerNavigator(
-//   {
-//     SellerMenuScreen: SellerMenuScreen,
-//   },
-//   {
-//     contentOptions: {
-//       activeTintColor: Colors.primary,
-//     },
-//   }
-// );
-
-// const AppNavigator = createDrawerNavigator(
-//   {
-//     Main: MainNavigator,
-//     Orders: BuyerNavigator,
-//     Seller: SellerNavigator,
-//   },
-//   {
-//     contentOptions: {
-//       activeTintColor: Colors.primary,
-//     },
-//   }
-// );

@@ -5,10 +5,11 @@ import CartItem from "./CartItem";
 
 const OrderItem = (props) => {
   const [showDetails, setShowDetails] = useState(false);
+
   return (
     <View style={styles.screen}>
       <View style={styles.summary}>
-        <Text style={styles.totalAmt}>${props.amount.toFixed(2)}</Text>
+        <Text style={styles.totalAmt}>${props.amount /*.toFixed(2) */}</Text>
         <Text style={styles.date}>{props.date}</Text>
       </View>
       <Button
@@ -20,16 +21,19 @@ const OrderItem = (props) => {
       />
       {showDetails && (
         <View style={styles.detailItems}>
-          {props.items.map((cartItem) => (
-            <CartItem
-              key={cartItem.mealId}
-              quantity={cartItem.mealQuantity}
-              title={cartItem.mealTitle}
-              amount={cartItem.sum}
-              preference={cartItem.mealPreference}
-              deletable={false}
-            />
-          ))}
+          {props.items.map(
+            (cartItem) =>
+              function render() {
+                <CartItem
+                  key={cartItem.mealId}
+                  quantity={cartItem.mealQuantity}
+                  title={cartItem.mealTitle}
+                  amount={cartItem.sum}
+                  preference={cartItem.mealPreference}
+                  deletable={false}
+                />;
+              }
+          )}
         </View>
       )}
     </View>

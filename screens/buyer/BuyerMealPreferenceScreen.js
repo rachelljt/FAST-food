@@ -1,22 +1,16 @@
 import React, { useState } from "react";
-import {
-  View,
-  StyleSheet,
-  Button,
-  Text,
-  TextInput,
-  TouchableOpacity,
-  Alert,
-} from "react-native";
+import { View, StyleSheet, Button, Text, TextInput, Alert } from "react-native";
 import { MEALS } from "../../data/dummy-data";
 import { useSelector, useDispatch } from "react-redux";
 import * as cartActions from "../../store/actions/cart";
-import cart from "../../store/reducers/cart";
 
 const BuyerMealPreferenceScreen = (props) => {
   const mealId = props.navigation.getParam("mealId");
 
-  const selectedMeal = MEALS.find((meal) => meal.id === mealId);
+  //const selectedMeal = MEALS.find((meal) => meal.id === mealId);
+  const selectedMeal = useSelector((state) =>
+    state.meals.meals.filter((meal) => meal.mealId === mealId)
+  );
 
   const [quantity, setQuantity] = useState(1);
 
