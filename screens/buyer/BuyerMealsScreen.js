@@ -101,14 +101,16 @@ const BuyerMealsScreen = (props) => {
     };
 
     return (
-      <MealItem
-        title={itemData.item.title}
-        price={itemData.item.price}
-        image={itemData.item.image}
-        onSelect={toPrefScreen}
-      >
-        <Button title="Add to Cart" onPress={toPrefScreen} color="white" />
-      </MealItem>
+      <View style={styles.mealsContainer}>
+        <MealItem
+          title={itemData.item.title}
+          price={itemData.item.price}
+          image={itemData.item.image}
+          onSelect={toPrefScreen}
+        >
+          <Button title="Add to Cart" onPress={toPrefScreen} />
+        </MealItem>
+      </View>
     );
   };
 
@@ -130,7 +132,6 @@ BuyerMealsScreen.navigationOptions = (navigationData) => {
   const selectedStall = STALLS.find((s) => s.id === stallId);
   return {
     headerTitle: selectedStall.title,
-    headerTintColor: "pink",
     headerRight: () => (
       <HeaderButtons HeaderButtonComponent={HeaderButton}>
         <Item
@@ -149,7 +150,18 @@ const styles = StyleSheet.create({
   screen: {
     flex: 1,
     padding: 20,
+    backgroundColor: "white",
+    // alignItems: "center",
+    // justifyContent: "center",
   },
+  // mealsContainer: {
+  //   backgroundColor: "white",
+  //   borderRadius: 20,
+  //   borderWidth: 2,
+  //   //borderColor: Colors.primary,
+  //   marginHorizontal: 20,
+  //   marginVertical: 20,
+  // },
   centered: {
     flex: 1,
     justifyContent: "center",

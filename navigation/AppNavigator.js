@@ -18,7 +18,7 @@ import OrdersScreen from "../screens/seller/OrdersScreen";
 
 import { Ionicons } from "@expo/vector-icons";
 import { Platform } from "react-native";
-import { Colors } from "react-native/Libraries/NewAppScreen";
+import Colors from "../constants/colors";
 
 const BuyerMainNavigator = createStackNavigator(
   {
@@ -91,10 +91,27 @@ const SellerMainNavigator = createStackNavigator(
   }
 );
 
+const sellerOrdersNavigator = createStackNavigator(
+  {
+    sellerOrders: OrdersScreen,
+  },
+  {
+    navigationOptions: {
+      drawerIcon: (drawerConfig) => (
+        <Ionicons
+          name={Platform.OS === "android" ? "md-list" : "ios-list"}
+          size={23}
+          color={drawerConfig.tintColor}
+        />
+      ),
+    },
+  }
+);
+
 const SellerNavigator = createDrawerNavigator(
   {
     Menu: SellerMainNavigator,
-    Orders: OrdersScreen,
+    Orders: sellerOrdersNavigator,
   },
   {
     contentOptions: {

@@ -43,7 +43,7 @@ const CartScreen = (props) => {
   };
 
   return (
-    <View style={styles.screen}>
+    <View style={styles.mainScreen}>
       <View style={styles.summary}>
         <Text style={styles.summaryText}>
           Total:{" "}
@@ -61,36 +61,44 @@ const CartScreen = (props) => {
           />
         )}
       </View>
-      <FlatList
-        data={cartMeals}
-        keyExtractor={(item) => item.mealId}
-        renderItem={(itemData) => (
-          <CartItem
-            quantity={itemData.item.mealQuantity}
-            title={itemData.item.mealTitle}
-            amount={itemData.item.sum}
-            preference={itemData.item.mealPreference}
-            deletable={true}
-            onRemove={() => {
-              dispatch(cartActions.removeFromCart(itemData.item.mealId));
-            }}
-          />
-        )}
-      />
+      <View style={styles.ordersScreen}>
+        <FlatList
+          data={cartMeals}
+          keyExtractor={(item) => item.mealId}
+          renderItem={(itemData) => (
+            <CartItem
+              quantity={itemData.item.mealQuantity}
+              title={itemData.item.mealTitle}
+              amount={itemData.item.sum}
+              preference={itemData.item.mealPreference}
+              deletable={true}
+              onRemove={() => {
+                dispatch(cartActions.removeFromCart(itemData.item.mealId));
+              }}
+            />
+          )}
+        />
+      </View>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
-  screen: {
-    margin: 20,
+  mainScreen: {
+    //margin: 20,
+    flex: 1,
+    backgroundColor: "white",
+  },
+  ordersScreen: {
+    backgroundColor: "white",
+    paddingHorizontal: 20,
+    paddingVertical: 18,
+    flex: 1,
   },
   summary: {
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",
-    marginBottom: 20,
-    padding: 10,
     shadowColor: "black",
     shadowOpacity: 0.26,
     shadowOffset: { width: 0, height: 2 },
@@ -98,12 +106,17 @@ const styles = StyleSheet.create({
     elevation: 5,
     borderRadius: 10,
     backgroundColor: "white",
+    marginTop: 30,
+    marginBottom: 15,
+    height: 60,
+    marginHorizontal: 20,
+    paddingHorizontal: 20,
   },
   summaryText: {
     fontSize: 18,
   },
   amount: {
-    color: "pink",
+    color: Colors.primary,
   },
 });
 

@@ -12,6 +12,7 @@ import Header from "../../components/Header";
 import { STALLS } from "../../data/dummy-data";
 import StallGridTile from "../../components/StallGridTile";
 import HeaderButton from "../../components/HeaderButton";
+import Colors from "../../constants/colors";
 
 const BuyerMainScreen = (props) => {
   const userId = props.navigation.getParam("userID");
@@ -31,19 +32,20 @@ const BuyerMainScreen = (props) => {
     );
   };
   return (
-    <FlatList
-      ListHeaderComponent={
-        <View style={styles.screen}>
-          <Text style={styles.myText}>{userId}</Text>
-        </View>
-      }
-      data={STALLS}
-      renderItem={renderGridItem}
-      numColumns={1}
-      ListFooterComponent={
+    <View style={styles.screen}>
+      <View>
+        <Text style={styles.title}>STALLS</Text>
+      </View>
+      <FlatList
+        keyExtractor={(item, index) => item.id}
+        data={STALLS}
+        renderItem={renderGridItem}
+        numColumns={1}
+      />
+      <View style={styles.logoutButton}>
         <Button title="Logout" onPress={() => props.navigation.goBack()} />
-      }
-    />
+      </View>
+    </View>
   );
 };
 
@@ -78,16 +80,19 @@ BuyerMainScreen.navigationOptions = (navigationData) => {
 
 const styles = StyleSheet.create({
   screen: {
-    alignItems: "center",
+    flex: 1,
+    backgroundColor: "white",
+    // justifyContent: "center",
+    // alignItems: "center",
   },
-  myText: {
-    fontSize: 20,
+  title: {
+    fontSize: 25,
+    fontFamily: "opensans-bold",
     textAlign: "center",
-    marginTop: 25,
-    borderWidth: 2,
-    borderColor: "purple",
-    width: "50%",
-    fontFamily: "humble-boys",
+    color: Colors.primary,
+  },
+  logoutButton: {
+    marginBottom: 20,
   },
 });
 

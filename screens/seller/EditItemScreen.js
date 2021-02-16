@@ -55,7 +55,7 @@ const EditItemScreen = (props) => {
     inputValues: {
       title: editedItem ? editedItem.title : "",
       imageUrl: editedItem ? editedItem.imageUrl : "",
-      price: editedItem ? editedItem.price : 0,
+      price: editedItem ? editedItem.price : "0",
     },
     inputValidities: {
       title: editedItem ? true : false,
@@ -141,43 +141,47 @@ const EditItemScreen = (props) => {
       behavior="padding"
       keyboardVerticalOffset={100}
     >
-      <ScrollView>
-        <View style={styles.overallContainer}>
-          <Input
-            id="title"
-            label="Title"
-            errorText="Please enter a valid title!"
-            autoCapitalize="words"
-            autoCorrect
-            returnKeyType="next"
-            onInputChange={inputChangeHandler}
-            initialValue={editedItem ? editedItem.title : ""}
-            initiallyValid={!!editedItem}
-            required
-          />
-
-          <Input
-            id="imageUrl"
-            label="Image URL"
-            errorText="Please enter a valid image url!"
-            returnKeyType="next"
-            onInputChange={inputChangeHandler}
-            initialValue={editedItem ? editedItem.imageUrl : ""}
-            initiallyValid={!!editedItem}
-            required
-          />
-
-          <Input
-            id="price"
-            label="Price"
-            errorText="Please enter a valid price!"
-            keyboardType="decimal-pad"
-            onInputChange={inputChangeHandler}
-            initialValue={editedItem ? editedItem.price.toString() : ""}
-            initiallyValid={!!editedItem}
-            required
-            min={0.1}
-          />
+      <ScrollView style={styles.screen}>
+        <View style={styles.textContainer}>
+          <View style={styles.firstTextInput}>
+            <Input
+              id="title"
+              label="Title"
+              errorText="Please enter a valid title!"
+              autoCapitalize="words"
+              autoCorrect
+              returnKeyType="next"
+              onInputChange={inputChangeHandler}
+              initialValue={editedItem ? editedItem.title : ""}
+              initiallyValid={!!editedItem}
+              required
+            />
+          </View>
+          <View style={styles.textInput}>
+            <Input
+              id="imageUrl"
+              label="Image URL"
+              errorText="Please enter a valid image url!"
+              returnKeyType="next"
+              onInputChange={inputChangeHandler}
+              initialValue={editedItem ? editedItem.imageUrl : ""}
+              initiallyValid={!!editedItem}
+              required
+            />
+          </View>
+          <View style={styles.textInput}>
+            <Input
+              id="price"
+              label="Price"
+              errorText="Please enter a valid price!"
+              keyboardType="decimal-pad"
+              onInputChange={inputChangeHandler}
+              initialValue={editedItem ? editedItem.price.toString() : ""}
+              initiallyValid={!!editedItem}
+              required
+              min={0.1}
+            />
+          </View>
         </View>
       </ScrollView>
     </KeyboardAvoidingView>
@@ -205,14 +209,28 @@ EditItemScreen.navigationOptions = (navigationData) => {
 };
 
 const styles = StyleSheet.create({
-  overallContainer: {
-    margin: 20,
+  screen: {
+    flex: 1,
+    backgroundColor: "white",
   },
   centered: {
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
   },
+  textContainer: {
+    borderRadius: 20,
+    borderWidth: 2,
+    borderColor: Colors.accent,
+    marginTop: 50,
+    marginHorizontal: 20,
+  },
+  firstTextInput: {
+    marginTop: 20,
+    marginBottom: 20,
+    marginHorizontal: 20,
+  },
+  textInput: { marginBottom: 20, marginHorizontal: 20 },
 });
 
 export default EditItemScreen;

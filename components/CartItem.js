@@ -7,15 +7,16 @@ import {
   Platform,
 } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
+import Colors from "../constants/colors";
 
 const CartItem = (props) => {
   return (
     <View style={styles.screen}>
       <View style={styles.cartItem}>
-        <Text style={styles.itemData}>
+        <View style={styles.itemData}>
           <Text style={styles.quantity}>{props.quantity} </Text>
           <Text style={styles.title}>{props.title}</Text>
-        </Text>
+        </View>
         <View style={styles.itemData}>
           <Text style={styles.amount}>${props.amount.toFixed(2)} </Text>
           {props.deletable && (
@@ -43,10 +44,13 @@ const styles = StyleSheet.create({
   screen: {
     backgroundColor: "white",
     marginBottom: 20,
-    borderRadius: 5,
+    borderRadius: 10,
+    borderWidth: 1,
+    borderColor: Colors.primary,
   },
   cartItem: {
     padding: 10,
+    flex: 1,
     flexDirection: "row",
     justifyContent: "space-between",
     marginHorizontal: 20,
@@ -54,15 +58,16 @@ const styles = StyleSheet.create({
   itemData: {
     flexDirection: "row",
     alignItems: "center",
+    justifyContent: "center",
   },
   quantity: {
-    fontSize: 16,
+    fontSize: 17,
   },
   title: {
-    fontSize: 16,
+    fontSize: 17,
   },
   amount: {
-    fontSize: 16,
+    fontSize: 17,
   },
   trashButton: {},
   preference: {

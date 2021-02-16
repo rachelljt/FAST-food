@@ -65,7 +65,7 @@ const Input = (props) => {
   };
 
   return (
-    <View style={styles.container}>
+    <View style={{ ...styles.container, ...props.container }}>
       <Text style={styles.label}> {props.label} </Text>
       <TextInput
         {...props}
@@ -85,15 +85,22 @@ const Input = (props) => {
 
 const styles = StyleSheet.create({
   container: {
+    //marginVertical: 15,
+    justifyContent: "center",
+    alignItems: "stretch",
+    flex: 1,
     width: "100%",
   },
   label: {
     fontFamily: "opensans-bold",
-    marginVertical: 8,
+    fontSize: 16,
+    marginBottom: 15,
   },
   input: {
+    width: "100%",
+    fontSize: 17,
     paddingHorizontal: 2,
-    paddingVertical: 5,
+    marginBottom: 35,
     borderBottomColor: "#ccc",
     borderBottomWidth: 1,
   },

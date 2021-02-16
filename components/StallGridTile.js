@@ -7,6 +7,7 @@ import {
   FlatList,
   TouchableOpacity,
 } from "react-native";
+import Colors from "../constants/colors";
 
 const StallGridTile = (props) => {
   return (
@@ -23,7 +24,7 @@ const styles = StyleSheet.create({
     flex: 1,
     padding: 10,
     margin: 15,
-    height: 100,
+    height: 150,
   },
   container: {
     flex: 1,
@@ -32,13 +33,13 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.25,
     shadowOffset: { width: 0, height: 2 },
     shadowRadius: 10,
-    backgroundColor: "pink",
-    padding: 15,
+    backgroundColor: Colors.primary,
+    padding: 5,
     justifyContent: "center",
     alignItems: "center",
   },
   title: {
-    fontFamily: "chicken-pie",
+    fontFamily: "opensans-bold",
     fontSize: 25,
   },
 });

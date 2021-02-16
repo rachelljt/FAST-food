@@ -37,46 +37,48 @@ const SellerMenuScreen = (props) => {
   };
 
   return (
-    <FlatList
-      data={sellerItems}
-      keyExtractor={(item) => item.id}
-      renderItem={(itemData) => (
-        <MealItem
-          title={itemData.item.title}
-          image={itemData.item.image}
-          price={itemData.item.price}
-          onSelect={() => {
-            editItemHandler(itemData.item.id);
-          }}
-        >
-          <View style={styles.buttonContainer}>
-            <Button
-              title="Edit"
-              onPress={() => {
-                editItemHandler(itemData.item.id);
-              }}
-            />
-            <Button
-              title="Delete"
-              onPress={deleteHandler.bind(this, itemData.item.id)}
-            />
-          </View>
-        </MealItem>
-      )}
-      ListFooterComponent={
-        <Button
-          style={styles.button}
-          title="Logout"
-          onPress={() => props.navigation.goBack()}
-        />
-      }
-    />
+    <View style={styles.screen}>
+      <FlatList
+        data={sellerItems}
+        keyExtractor={(item) => item.id}
+        renderItem={(itemData) => (
+          <MealItem
+            title={itemData.item.title}
+            image={itemData.item.image}
+            price={itemData.item.price}
+            onSelect={() => {
+              editItemHandler(itemData.item.id);
+            }}
+          >
+            <View style={styles.buttonContainer}>
+              <Button
+                title="Edit"
+                onPress={() => {
+                  editItemHandler(itemData.item.id);
+                }}
+              />
+              <Button
+                title="Delete"
+                onPress={deleteHandler.bind(this, itemData.item.id)}
+              />
+            </View>
+          </MealItem>
+        )}
+        ListFooterComponent={
+          <Button
+            style={styles.button}
+            title="Logout"
+            onPress={() => props.navigation.goBack()}
+          />
+        }
+      />
+    </View>
   );
 };
 
 SellerMenuScreen.navigationOptions = (navigationData) => {
   return {
-    headerTitle: "stall name",
+    headerTitle: "Beverages",
     headerBackground: () => <Header />,
     headerLeft: () => (
       <HeaderButtons HeaderButtonComponent={HeaderButton}>
@@ -105,7 +107,11 @@ SellerMenuScreen.navigationOptions = (navigationData) => {
 
 const styles = StyleSheet.create({
   screen: {
-    alignItems: "center",
+    flex: 1,
+    padding: 20,
+    backgroundColor: "white",
+    // alignItems: "center",
+    // justifyContent: "center",
   },
   buttonContainer: {
     flexDirection: "row",

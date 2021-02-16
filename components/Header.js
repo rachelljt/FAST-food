@@ -17,8 +17,8 @@ const Header = (props) => {
 
 const styles = StyleSheet.create({
   header: {
-    height: 60,
-    backgroundColor: Colors.primary,
+    height: "100%",
+    backgroundColor: "white",
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "center",
@@ -30,7 +30,7 @@ const styles = StyleSheet.create({
     marginTop: 20,
   },
   headerTitle: {
-    fontSize: 20,
+    fontSize: 30,
     color: "white",
     fontFamily: "opensans-semibold",
     paddingTop: 20,
